@@ -1,21 +1,20 @@
-storage_account_names                       = ["backend-storage-account", "frontend-storage-account", "database-storage-account"]
-storage_account_location                    = "asia-south1"
-storage_account_force_destroy               = false
-storage_account_uniform_bucket_level_access = true
+storage_bucket_names                       = ["backend-storage-account", "frontend-storage-account", "database-storage-account"]
+storage_bucket_location                    = "asia-south1"
+storage_bucket_force_destroy               = false
+storage_bucket_uniform_bucket_level_access = true
 
-
-storage_accounts = {
-  "storage_account-1" = {
-    storage_account_name                        = "demo-storage-account-terraform"
-    storage_account_location                    = "asia-south1"
-    storage_account_force_destroy               = false
-    storage_account_uniform_bucket_level_access = true
+storage_buckets = {
+  "storage_bucket-1" = {
+    storage_bucket_name                        = "demo-storage-account-terraform"
+    storage_bucket_location                    = "asia-south1"
+    storage_bucket_force_destroy               = false
+    storage_bucket_uniform_bucket_level_access = true
   }
-  "storage_account-2" = {
-    storage_account_name                        = "demo-storage-account-terraform2"
-    storage_account_location                    = "asia-south1"
-    storage_account_force_destroy               = true
-    storage_account_uniform_bucket_level_access = true
+  "storage_bucket-2" = {
+    storage_bucket_name                        = "demo-storage-account-terraform2"
+    storage_bucket_location                    = "asia-south1"
+    storage_bucket_force_destroy               = true
+    storage_bucket_uniform_bucket_level_access = true
   }
 }
 

@@ -1,30 +1,30 @@
-variable "storage_account_location" {
-  description = "The location of the storage account."
+variable "storage_bucket_location" {
+  description = "The location of the storage bucket."
   type        = string
 }
 
-variable "storage_account_force_destroy" {
-  description = "Whether to force destroy the storage account."
+variable "storage_bucket_force_destroy" {
+  description = "Whether to force destroy the storage bucket."
   type        = bool
 }
 
-variable "storage_account_uniform_bucket_level_access" {
+variable "storage_bucket_uniform_bucket_level_access" {
   description = "Whether to enable uniform bucket-level access."
   type        = bool
 }
 
-variable "storage_account_names" {
-  description = "The names for storage accounts."
+variable "storage_bucket_names" {
+  description = "The names for storage buckets."
   type        = list(string)
 }
 
-variable "storage_accounts" {
+variable "storage_buckets" {
   description = "The ID of the service account."
   type = map(object({
-    storage_account_name                        = string
-    storage_account_location                    = string
-    storage_account_force_destroy               = bool
-    storage_account_uniform_bucket_level_access = bool
+    storage_bucket_name                        = string
+    storage_bucket_location                    = string
+    storage_bucket_force_destroy               = bool
+    storage_bucket_uniform_bucket_level_access = bool
   }))
 }
 

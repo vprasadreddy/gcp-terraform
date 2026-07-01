@@ -1,14 +1,14 @@
 # Multiple storage buckets using List
 
 resource "google_storage_bucket" "my_bucket" {
-  # count = length(var.storage_account_names)
-  # name  = "${var.storage_account_name}-${count.index}"
-  # name = var.storage_account_names[count.index]
-  for_each                    = toset(var.storage_account_names)
+  # count = length(var.storage_bucket_names)
+  # name  = "${var.storage_bucket_name}-${count.index}"
+  # name = var.storage_bucket_names[count.index]
+  for_each                    = toset(var.storage_bucket_names)
   name                        = each.value
-  location                    = var.storage_account_location
-  force_destroy               = var.storage_account_force_destroy
-  uniform_bucket_level_access = var.storage_account_uniform_bucket_level_access
+  location                    = var.storage_bucket_location
+  force_destroy               = var.storage_bucket_force_destroy
+  uniform_bucket_level_access = var.storage_bucket_uniform_bucket_level_access
 
   lifecycle_rule {
     action {
@@ -21,13 +21,13 @@ resource "google_storage_bucket" "my_bucket" {
   }
 }
 
-module "storage-account" {
-  source                                      = "./modules-without-for-each/storage-bucket"
-  for_each                                    = var.storage_accounts
-  storage_account_name                        = each.value.storage_account_name
-  storage_account_location                    = each.value.storage_account_location
-  storage_account_force_destroy               = each.value.storage_account_force_destroy
-  storage_account_uniform_bucket_level_access = each.value.storage_account_uniform_bucket_level_access
+module "storage-bucket" {
+  source                                     = "./modules-without-for-each/storage-bucket"
+  for_each                                   = var.storage_buckets
+  storage_bucket_name                        = each.value.storage_bucket_name
+  storage_bucket_location                    = each.value.storage_bucket_location
+  storage_bucket_force_destroy               = each.value.storage_bucket_force_destroy
+  storage_bucket_uniform_bucket_level_access = each.value.storage_bucket_uniform_bucket_level_access
 }
 
 module "service-account" {
@@ -41,9 +41,19 @@ module "compute-engine" {
   depends_on = [module.service-account]
 }
 
-# Module outputs
-output "storage_bucket_urls" {
-  value = values(module.storage-account)[*].storage_bucket_url_outputs
+# Get URL of Single Storage Bucket when using for_each with Module
+output "individual_storage_bucket_url" {
+  value = module.storage-bucket["storage_bucket-1"].storage_bucket_url
+}
+
+# Access all storage_bucket_urls as a map
+output "all_storage_bucket_urls_as_map" {
+  value = { for key, value in module.storage-bucket : key => value.storage_bucket_url }
+}
+
+# Get all storage_bucket_urls as a list using splat operator
+output "all_storage_bucket_urls_as_list" {
+  value = values(module.storage-bucket)[*].storage_bucket_url
 }
 
 # Module outputs
