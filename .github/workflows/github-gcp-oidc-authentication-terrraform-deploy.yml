@@ -156,7 +156,6 @@ jobs:
 
       - name: Terraform Init
         run: terraform init
-
       - name: Terraform Destroy
         id: terraform-destroy
         run: terraform destroy -auto-approve
