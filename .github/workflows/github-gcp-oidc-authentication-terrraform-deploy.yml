@@ -126,7 +126,7 @@ jobs:
 
       - name: Terraform Apply
         id: terraform-apply
-        run: terraform apply tfplan -auto-approve
+        run: terraform apply tfplan
 
   terraform-destroy:
     if: ${{ github.event.inputs.terraform_action == 'destroy' }}
