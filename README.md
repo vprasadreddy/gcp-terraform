@@ -51,14 +51,6 @@ terraform {
 }
 ```
 
-### 5. Run Terraform locally
-
-```bash
-terraform init -reconfigure
-terraform plan
-terraform apply
-```
-
 ## Recommended minimum roles
 
 - Project-level: `roles/editor`
